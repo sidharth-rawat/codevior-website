@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, Lightbulb, Target, Users, Code2 } from 'lucide-react';
 import aboutUsImage from '../../assets/images/about-us.png';
 
@@ -75,10 +76,12 @@ export default function About() {
                 <span className="text-gray-500">Team Image</span>
               </div> */}
               <div className="absolute inset-0 rounded-lg overflow-hidden">
-                <img 
-                  src={aboutUsImage.src} 
+                <Image 
+                  src={aboutUsImage}
                   alt="About Us" 
-                  className="w-full h-full object-cover"
+                  className="object-cover"
+                  fill
+                  priority
                 />
               </div>
             </motion.div>

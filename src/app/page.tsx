@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { Code2, Smartphone, Palette, Brush, Bot, RefreshCw, ArrowRight } from 'lucide-react';
 import heroBg from '../assets/images/hero-bg.jpg';
 import aboutUsImage from '../assets/images/about-us.png';
@@ -122,10 +123,12 @@ export default function Home() {
               className="relative h-96"
             >
               <div className="absolute inset-0 rounded-lg overflow-hidden">
-                <img 
-                  src={aboutUsImage.src} 
+                <Image 
+                  src={aboutUsImage}
                   alt="About Us" 
-                  className="w-full h-full object-cover"
+                  className="object-cover"
+                  fill
+                  priority
                 />
               </div>
             </motion.div>
