@@ -39,3 +39,8 @@ jobs:
         run: |
           aws s3 sync ./.next/static s3://${{ secrets.S3_BUCKET_NAME }}/_next/static/ --cache-control "public,max-age=31536000,immutable"
           aws s3 sync ./out s3://${{ secrets.S3_BUCKET_NAME }} --delete
+          
+      - name: Configure S3 website routing
+        run: |
+          # Configure S3 bucket for static website hosting with proper error handling
+          aws s3 website s3://${{ secrets.S3_BUCKET_NAME }} --index-document index.html --error-document index.html
