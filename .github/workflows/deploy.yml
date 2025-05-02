@@ -38,3 +38,7 @@ jobs:
         run: |
           aws s3 sync ./.next/static s3://${{ secrets.S3_BUCKET_NAME }}/_next/static/ --cache-control "public,max-age=31536000,immutable"
           aws s3 sync ./out s3://${{ secrets.S3_BUCKET_NAME }} --delete
+          
+      - name: Invalidate CloudFront
+        run: |
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
