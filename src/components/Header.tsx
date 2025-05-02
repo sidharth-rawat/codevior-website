@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from "react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -44,7 +44,10 @@ export default function Header() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <Link href="/" className="text-xl sm:text-2xl font-bold text-purple-600">
+            <Link
+              href="/"
+              className="text-xl sm:text-2xl font-bold text-purple-600"
+            >
               Codevior
             </Link>
           </motion.div>
@@ -56,7 +59,10 @@ export default function Header() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="hidden md:flex items-center space-x-4 lg:space-x-8"
           >
-            <Link href="/" className="text-gray-600 hover:text-purple-600 text-sm lg:text-base">
+            <Link
+              href="/"
+              className="text-gray-600 hover:text-purple-600 text-sm lg:text-base"
+            >
               Home
             </Link>
             <Link
@@ -94,7 +100,12 @@ export default function Header() {
             className="md:hidden text-gray-600"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
               {isMenuOpen ? (
                 <path
                   strokeLinecap="round"
@@ -125,8 +136,12 @@ export default function Header() {
               className="md:hidden mt-4 pb-4"
             >
               <div className="flex flex-col space-y-4">
-                {['Home', 'Services', 'About', 'Contact'].map((item) => (
-                  <motion.div key={item} variants={menuItemVariants} whileHover={{ x: 10 }}>
+                {["Home", "Services", "About", "Contact"].map((item) => (
+                  <motion.div
+                    key={item}
+                    variants={menuItemVariants}
+                    whileHover={{ x: 10 }}
+                  >
                     <Link
                       href={`/${item.toLowerCase()}`}
                       className="text-gray-600 hover:text-purple-600 block py-2"

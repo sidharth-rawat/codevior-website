@@ -1,26 +1,28 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { MapPin, Phone, Mail, Send } from 'lucide-react';
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { MapPin, Phone, Mail, Send } from "lucide-react";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    service: '',
-    message: '',
+    name: "",
+    email: "",
+    phone: "",
+    service: "",
+    message: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission here
-    console.log('Form submitted:', formData);
+    console.log("Form submitted:", formData);
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -48,7 +50,8 @@ export default function Contact() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-base sm:text-xl max-w-3xl mx-auto"
           >
-            Get in touch with us to discuss your project or schedule a consultation
+            Get in touch with us to discuss your project or schedule a
+            consultation
           </motion.p>
         </div>
       </section>
@@ -169,9 +172,9 @@ export default function Contact() {
                     <MapPin className="w-6 h-6 text-purple-600 mr-3 mt-1" />
                     <div>
                       <h3 className="font-semibold">Address</h3>
-                      <a 
-                        href="https://www.google.com/maps/search/?api=1&query=Kashipur+Uttarakhand+India" 
-                        target="_blank" 
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=Kashipur+Uttarakhand+India"
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-600 hover:text-purple-600 transition-colors cursor-pointer"
                       >
@@ -183,8 +186,8 @@ export default function Contact() {
                     <Phone className="w-6 h-6 text-purple-600 mr-3" />
                     <div>
                       <h3 className="font-semibold">Phone</h3>
-                      <a 
-                        href="tel:+918979049772" 
+                      <a
+                        href="tel:+918979049772"
                         className="text-gray-600 hover:text-purple-600 transition-colors cursor-pointer"
                       >
                         +91 8979049772
@@ -195,8 +198,8 @@ export default function Contact() {
                     <Mail className="w-6 h-6 text-purple-600 mr-3" />
                     <div>
                       <h3 className="font-semibold">Email</h3>
-                      <a 
-                        href="mailto:support@codevior.com" 
+                      <a
+                        href="mailto:support@codevior.com"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-600 hover:text-purple-600 transition-colors cursor-pointer"

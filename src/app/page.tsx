@@ -1,18 +1,28 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { Code2, Smartphone, Palette, Brush, Bot, RefreshCw, ArrowRight } from 'lucide-react';
-import heroBg from '../assets/images/hero-bg.jpg';
-import aboutUsImage from '../assets/images/about-us.png';
+import Link from "next/link";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import {
+  Code2,
+  Smartphone,
+  Palette,
+  Brush,
+  Bot,
+  RefreshCw,
+  ArrowRight,
+} from "lucide-react";
+import heroBg from "../assets/images/hero-bg.jpg";
+import aboutUsImage from "../assets/images/about-us.png";
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat text-white" 
-      style={{ backgroundImage: `url(${heroBg.src})` }}>
+      <section
+        className="relative h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat text-white"
+        style={{ backgroundImage: `url(${heroBg.src})` }}
+      >
         <div className="absolute inset-0 bg-black/50 " />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -76,7 +86,10 @@ export default function Home() {
                 whileHover={{ y: -10 }}
                 className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
               >
-                <motion.div whileHover={{ scale: 1.1 }} className="text-purple-600 mb-6">
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  className="text-purple-600 mb-6"
+                >
                   <service.icon className="w-12 h-12" />
                 </motion.div>
                 <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
@@ -106,11 +119,15 @@ export default function Home() {
             >
               <h2 className="text-4xl font-bold mb-6">About Us</h2>
               <p className="text-gray-600 mb-6">
-                We are a team of passionate developers and designers dedicated to creating
-                innovative solutions that help businesses grow and succeed in the digital world.
+                We are a team of passionate developers and designers dedicated
+                to creating innovative solutions that help businesses grow and
+                succeed in the digital world.
               </p>
               <motion.div whileHover={{ x: 10 }}>
-                <Link href="/about" className="text-purple-600 font-semibold hover:text-purple-700">
+                <Link
+                  href="/about"
+                  className="text-purple-600 font-semibold hover:text-purple-700"
+                >
                   Learn More →
                 </Link>
               </motion.div>
@@ -123,9 +140,9 @@ export default function Home() {
               className="relative h-96"
             >
               <div className="absolute inset-0 rounded-lg overflow-hidden">
-                <Image 
+                <Image
                   src={aboutUsImage}
-                  alt="About Us" 
+                  alt="About Us"
                   className="object-cover"
                   fill
                   priority
@@ -166,41 +183,44 @@ export default function Home() {
 const services = [
   {
     icon: Code2,
-    title: 'Web Development',
+    title: "Web Development",
     description:
-      'Custom web applications built with modern technologies to meet your specific needs.',
-    link: 'web-development',
+      "Custom web applications built with modern technologies to meet your specific needs.",
+    link: "web-development",
   },
   {
     icon: Smartphone,
-    title: 'Mobile Development',
-    description: 'Native and cross-platform mobile applications for iOS and Android.',
-    link: 'app-development',
+    title: "Mobile Development",
+    description:
+      "Native and cross-platform mobile applications for iOS and Android.",
+    link: "app-development",
   },
   {
     icon: Palette,
-    title: 'UI/UX Design',
-    description: 'Beautiful and intuitive user interfaces that enhance user experience.',
-    link: 'web-design',
+    title: "UI/UX Design",
+    description:
+      "Beautiful and intuitive user interfaces that enhance user experience.",
+    link: "web-design",
   },
   {
     icon: Brush,
-    title: 'Graphic Design',
+    title: "Graphic Design",
     description:
-      'Creative visual solutions that help your brand stand out and communicate effectively.',
-    link: 'graphic-design',
+      "Creative visual solutions that help your brand stand out and communicate effectively.",
+    link: "graphic-design",
   },
   {
     icon: Bot,
-    title: 'LLM Solutions',
-    description: 'Leverage the power of Large Language Models to enhance your business operations.',
-    link: 'llm-solutions',
+    title: "LLM Solutions",
+    description:
+      "Leverage the power of Large Language Models to enhance your business operations.",
+    link: "llm-solutions",
   },
   {
     icon: RefreshCw,
-    title: 'Digital Transformation',
+    title: "Digital Transformation",
     description:
-      'Transform your business with cutting-edge digital solutions that drive growth and efficiency.',
-    link: 'digital-transformation',
+      "Transform your business with cutting-edge digital solutions that drive growth and efficiency.",
+    link: "digital-transformation",
   },
 ];

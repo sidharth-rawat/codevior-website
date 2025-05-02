@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Loading } from '@/components/ui/loading';
-import { motion } from 'framer-motion';
+import { Loading } from "@/components/ui/loading";
+import { motion } from "framer-motion";
 
 export default function LoadingPage() {
   return (
@@ -20,7 +20,7 @@ export default function LoadingPage() {
             transition={{
               duration: 10,
               repeat: Infinity,
-              ease: 'linear',
+              ease: "linear",
             }}
           />
           <motion.div
@@ -32,7 +32,7 @@ export default function LoadingPage() {
             transition={{
               duration: 8,
               repeat: Infinity,
-              ease: 'linear',
+              ease: "linear",
             }}
           />
         </div>

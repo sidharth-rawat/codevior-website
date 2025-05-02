@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import Link from 'next/link';
+import { motion } from "framer-motion";
+import Link from "next/link";
 import {
   Smartphone,
   Code2,
@@ -13,8 +13,8 @@ import {
   Zap,
   Shield,
   ArrowRight,
-} from 'lucide-react';
-import { useEffect, useState } from 'react';
+} from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function Services() {
   const [isMounted, setIsMounted] = useState(false);
@@ -50,7 +50,8 @@ export default function Services() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl max-w-3xl mx-auto"
           >
-            Comprehensive technology solutions to help your business thrive in the digital age
+            Comprehensive technology solutions to help your business thrive in
+            the digital age
           </motion.p>
         </div>
       </section>
@@ -72,7 +73,9 @@ export default function Services() {
                   <div className="text-purple-600 mb-4">
                     <service.icon className="w-12 h-12" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
+                  <h3 className="text-xl font-semibold mb-3">
+                    {service.title}
+                  </h3>
                   <p className="text-gray-600 mb-4">{service.description}</p>
                   <Link
                     href={`/services/${service.link}`}
@@ -113,8 +116,12 @@ export default function Services() {
                 <div className="text-purple-600 mb-3 sm:mb-4">
                   <benefit.icon className="w-10 h-10" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">{benefit.title}</h3>
-                <p className="text-sm sm:text-base text-gray-600">{benefit.description}</p>
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">
+                  {benefit.title}
+                </h3>
+                <p className="text-sm sm:text-base text-gray-600">
+                  {benefit.description}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -153,62 +160,65 @@ export default function Services() {
 const services = [
   {
     icon: Code2,
-    title: 'Web Development',
+    title: "Web Development",
     description:
-      'Custom web applications built with modern technologies to meet your specific needs.',
-    link: 'web-development',
+      "Custom web applications built with modern technologies to meet your specific needs.",
+    link: "web-development",
   },
   {
     icon: Smartphone,
-    title: 'Mobile Development',
-    description: 'Native and cross-platform mobile applications for iOS and Android.',
-    link: 'app-development',
+    title: "Mobile Development",
+    description:
+      "Native and cross-platform mobile applications for iOS and Android.",
+    link: "app-development",
   },
   {
     icon: Palette,
-    title: 'UI/UX Design',
-    description: 'Beautiful and intuitive user interfaces that enhance user experience.',
-    link: 'web-design',
+    title: "UI/UX Design",
+    description:
+      "Beautiful and intuitive user interfaces that enhance user experience.",
+    link: "web-design",
   },
   {
     icon: Brush,
-    title: 'Graphic Design',
+    title: "Graphic Design",
     description:
-      'Creative visual solutions that help your brand stand out and communicate effectively.',
-    link: 'graphic-design',
+      "Creative visual solutions that help your brand stand out and communicate effectively.",
+    link: "graphic-design",
   },
   {
     icon: Bot,
-    title: 'LLM Solutions',
-    description: 'Leverage the power of Large Language Models to enhance your business operations.',
-    link: 'llm-solutions',
+    title: "LLM Solutions",
+    description:
+      "Leverage the power of Large Language Models to enhance your business operations.",
+    link: "llm-solutions",
   },
   {
     icon: RefreshCw,
-    title: 'Digital Transformation',
+    title: "Digital Transformation",
     description:
-      'Transform your business with cutting-edge digital solutions that drive growth and efficiency.',
-    link: 'digital-transformation',
+      "Transform your business with cutting-edge digital solutions that drive growth and efficiency.",
+    link: "digital-transformation",
   },
 ];
 
 const benefits = [
   {
     icon: Star,
-    title: 'Expert Team',
+    title: "Expert Team",
     description:
-      'Our team consists of experienced professionals with expertise in various technologies.',
+      "Our team consists of experienced professionals with expertise in various technologies.",
   },
   {
     icon: Zap,
-    title: 'Fast Delivery',
+    title: "Fast Delivery",
     description:
-      'We prioritize efficient development processes to deliver projects on time and within budget.',
+      "We prioritize efficient development processes to deliver projects on time and within budget.",
   },
   {
     icon: Shield,
-    title: 'Quality Assurance',
+    title: "Quality Assurance",
     description:
-      'Rigorous testing and quality control ensure that our solutions meet the highest standards.',
+      "Rigorous testing and quality control ensure that our solutions meet the highest standards.",
   },
 ];

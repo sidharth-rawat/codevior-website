@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import Image from 'next/image';
-import { ArrowRight, Lightbulb, Target, Users, Code2 } from 'lucide-react';
-import aboutUsImage from '../../assets/images/about-us.png';
+import { motion } from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight, Lightbulb, Target, Users, Code2 } from "lucide-react";
+import aboutUsImage from "../../assets/images/about-us.png";
 
 export default function About() {
   return (
@@ -34,8 +34,8 @@ export default function About() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl max-w-3xl mx-auto"
           >
-            We&apos;re a team of passionate developers and designers dedicated to creating
-            innovative solutions.
+            We&apos;re a team of passionate developers and designers dedicated
+            to creating innovative solutions.
           </motion.p>
         </div>
       </section>
@@ -53,14 +53,16 @@ export default function About() {
             >
               <h2 className="text-3xl font-bold mb-6">Our Story</h2>
               <p className="text-gray-600 mb-6">
-                Founded with a vision to transform businesses through technology, we&apos;ve grown
-                into a team of experts who are passionate about creating innovative solutions that
-                drive growth and success.
+                Founded with a vision to transform businesses through
+                technology, we&apos;ve grown into a team of experts who are
+                passionate about creating innovative solutions that drive growth
+                and success.
               </p>
               <p className="text-gray-600 mb-6">
-                We believe in the power of technology to solve complex problems and create
-                opportunities. Our team combines technical expertise with creative thinking to
-                deliver solutions that make a difference.
+                We believe in the power of technology to solve complex problems
+                and create opportunities. Our team combines technical expertise
+                with creative thinking to deliver solutions that make a
+                difference.
               </p>
             </motion.div>
 
@@ -76,9 +78,9 @@ export default function About() {
                 <span className="text-gray-500">Team Image</span>
               </div> */}
               <div className="absolute inset-0 rounded-lg overflow-hidden">
-                <Image 
+                <Image
                   src={aboutUsImage}
-                  alt="About Us" 
+                  alt="About Us"
                   className="object-cover"
                   fill
                   priority
@@ -154,19 +156,20 @@ export default function About() {
 const values = [
   {
     icon: Lightbulb,
-    title: 'Innovation',
+    title: "Innovation",
     description:
-      'We constantly explore new technologies and approaches to deliver cutting-edge solutions.',
+      "We constantly explore new technologies and approaches to deliver cutting-edge solutions.",
   },
   {
     icon: Target,
-    title: 'Excellence',
+    title: "Excellence",
     description:
-      'We strive for excellence in everything we do, from code quality to user experience.',
+      "We strive for excellence in everything we do, from code quality to user experience.",
   },
   {
     icon: Users,
-    title: 'Collaboration',
-    description: 'We believe in the power of teamwork and close collaboration with our clients.',
+    title: "Collaboration",
+    description:
+      "We believe in the power of teamwork and close collaboration with our clients.",
   },
 ];

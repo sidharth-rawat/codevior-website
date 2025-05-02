@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import Link from 'next/link';
+import { motion } from "framer-motion";
+import Link from "next/link";
 import {
   Facebook,
   Twitter,
@@ -11,7 +11,7 @@ import {
   Phone,
   MapPin,
   ArrowRight,
-} from 'lucide-react';
+} from "lucide-react";
 
 export default function Footer() {
   return (
@@ -22,7 +22,8 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-4">Codevior</h3>
             <p className="text-gray-400 mb-4">
-              Your trusted technology partner for innovative solutions and digital transformation.
+              Your trusted technology partner for innovative solutions and
+              digital transformation.
             </p>
             <div className="flex space-x-4">
               <motion.a
@@ -69,7 +70,11 @@ export default function Footer() {
             <h3 className="text-xl font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               {quickLinks.map((link, index) => (
-                <motion.li key={index} whileHover={{ x: 5 }} className="flex items-center">
+                <motion.li
+                  key={index}
+                  whileHover={{ x: 5 }}
+                  className="flex items-center"
+                >
                   <ArrowRight size={16} className="mr-2 text-purple-500" />
                   <Link
                     href={link.href}
@@ -87,7 +92,11 @@ export default function Footer() {
             <h3 className="text-xl font-bold mb-4">Our Services</h3>
             <ul className="space-y-2">
               {services.map((service, index) => (
-                <motion.li key={index} whileHover={{ x: 5 }} className="flex items-center">
+                <motion.li
+                  key={index}
+                  whileHover={{ x: 5 }}
+                  className="flex items-center"
+                >
                   <ArrowRight size={16} className="mr-2 text-purple-500" />
                   <Link
                     href={service.href}
@@ -106,7 +115,9 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start">
                 <MapPin size={20} className="mr-3 text-purple-500 mt-1" />
-                <span className="text-gray-400">123 Tech Street, Digital City, 12345</span>
+                <span className="text-gray-400">
+                  123 Tech Street, Digital City, 12345
+                </span>
               </li>
               <li className="flex items-center">
                 <Phone size={20} className="mr-3 text-purple-500" />
@@ -154,17 +165,17 @@ export default function Footer() {
 }
 
 const quickLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'About Us', href: '/about' },
-  { label: 'Services', href: '/services' },
-  { label: 'Contact', href: '/contact' },
-  { label: 'Blog', href: '/blog' },
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Contact", href: "/contact" },
+  { label: "Blog", href: "/blog" },
 ];
 
 const services = [
-  { label: 'App Development', href: '/services#app-development' },
-  { label: 'Web Development', href: '/services#web-development' },
-  { label: 'Web Design', href: '/services#web-design' },
-  { label: 'Graphic Design', href: '/services#graphic-design' },
-  { label: 'LLM Solutions', href: '/services#llm-solutions' },
+  { label: "App Development", href: "/services#app-development" },
+  { label: "Web Development", href: "/services#web-development" },
+  { label: "Web Design", href: "/services#web-design" },
+  { label: "Graphic Design", href: "/services#graphic-design" },
+  { label: "LLM Solutions", href: "/services#llm-solutions" },
 ];

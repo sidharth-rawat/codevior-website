@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { CheckCircle2 } from 'lucide-react';
-import { LucideIcon } from 'lucide-react';
-import * as Icons from 'lucide-react';
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { CheckCircle2 } from "lucide-react";
+import { LucideIcon } from "lucide-react";
+import * as Icons from "lucide-react";
 
 interface ServiceDetailClientProps {
   service: {
@@ -26,10 +26,14 @@ interface ServiceDetailClientProps {
   };
 }
 
-export default function ServiceDetailClient({ service }: ServiceDetailClientProps) {
+export default function ServiceDetailClient({
+  service,
+}: ServiceDetailClientProps) {
   const IconComponent = Icons[service.icon as keyof typeof Icons] as LucideIcon;
-  const PillarIcon = (icon: string) => Icons[icon as keyof typeof Icons] as LucideIcon;
-  const ServiceIcon = (icon: string) => Icons[icon as keyof typeof Icons] as LucideIcon;
+  const PillarIcon = (icon: string) =>
+    Icons[icon as keyof typeof Icons] as LucideIcon;
+  const ServiceIcon = (icon: string) =>
+    Icons[icon as keyof typeof Icons] as LucideIcon;
 
   return (
     <article className="pb-20">
@@ -42,7 +46,9 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
             transition={{ duration: 0.8 }}
             className="flex justify-center mb-6"
           >
-            {IconComponent && <IconComponent className="w-16 h-16" aria-hidden="true" />}
+            {IconComponent && (
+              <IconComponent className="w-16 h-16" aria-hidden="true" />
+            )}
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -74,7 +80,9 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-2xl sm:text-3xl font-bold mb-6">About Our {service.title}</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold mb-6">
+                About Our {service.title}
+              </h2>
               <div className="prose prose-lg max-w-none">
                 <p className="text-gray-600 mb-6">{service.longDescription}</p>
               </div>
@@ -148,7 +156,7 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
                   className="relative h-[400px] rounded-lg overflow-hidden shadow-lg"
                 >
                   <Image
-                    src={`/images/services/${service.title.toLowerCase().replace(/\s+/g, '-')}.jpg`}
+                    src={`/images/services/${service.title.toLowerCase().replace(/\s+/g, "-")}.jpg`}
                     alt={`${service.title} services illustration`}
                     fill
                     className="object-cover"
@@ -165,7 +173,9 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {service.services.map((serviceItem, index) => {
-                      const ServiceIconComponent = ServiceIcon(serviceItem.icon);
+                      const ServiceIconComponent = ServiceIcon(
+                        serviceItem.icon,
+                      );
                       return (
                         <motion.div
                           key={index}
@@ -181,7 +191,9 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
                               aria-hidden="true"
                             />
                           )}
-                          <span className="text-purple-600">{serviceItem.name}</span>
+                          <span className="text-purple-600">
+                            {serviceItem.name}
+                          </span>
                         </motion.div>
                       );
                     })}
@@ -189,7 +201,9 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
                 </>
               )}
 
-              <h2 className="text-xl font-semibold mb-4 mt-8">Technologies We Use</h2>
+              <h2 className="text-xl font-semibold mb-4 mt-8">
+                Technologies We Use
+              </h2>
               <div className="flex flex-wrap gap-3">
                 {service.technologies.map((tech, index) => (
                   <motion.span
@@ -210,4 +224,4 @@ export default function ServiceDetailClient({ service }: ServiceDetailClientProp
       </section>
     </article>
   );
-} 
+}

@@ -1,25 +1,29 @@
-'use client';
+"use client";
 
-import { cn } from '@/lib/utils';
-import { motion } from 'framer-motion';
+import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 interface LoadingProps {
   className?: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
   fullScreen?: boolean;
 }
 
-export function Loading({ className, size = 'md', fullScreen = false }: LoadingProps) {
+export function Loading({
+  className,
+  size = "md",
+  fullScreen = false,
+}: LoadingProps) {
   const sizeClasses = {
-    sm: 'w-4 h-4',
-    md: 'w-8 h-8',
-    lg: 'w-12 h-12',
+    sm: "w-4 h-4",
+    md: "w-8 h-8",
+    lg: "w-12 h-12",
   };
 
   const containerClasses = cn(
-    'flex flex-col items-center justify-center',
-    fullScreen ? 'min-h-screen' : '',
-    className
+    "flex flex-col items-center justify-center",
+    fullScreen ? "min-h-screen" : "",
+    className,
   );
 
   return (
@@ -31,7 +35,7 @@ export function Loading({ className, size = 'md', fullScreen = false }: LoadingP
         className="flex flex-col items-center"
       >
         {/* Main Spinner */}
-        <div className={cn('relative', sizeClasses[size])}>
+        <div className={cn("relative", sizeClasses[size])}>
           <motion.div
             className="absolute inset-0 rounded-full border-4 border-purple-200"
             animate={{
@@ -40,7 +44,7 @@ export function Loading({ className, size = 'md', fullScreen = false }: LoadingP
             transition={{
               duration: 1.5,
               repeat: Infinity,
-              ease: 'linear',
+              ease: "linear",
             }}
           />
           <motion.div
@@ -51,7 +55,7 @@ export function Loading({ className, size = 'md', fullScreen = false }: LoadingP
             transition={{
               duration: 1,
               repeat: Infinity,
-              ease: 'linear',
+              ease: "linear",
             }}
           />
         </div>

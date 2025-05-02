@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { ArrowLeft, Home } from 'lucide-react';
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { ArrowLeft, Home } from "lucide-react";
 
 export default function NotFound() {
   return (
@@ -26,7 +26,7 @@ export default function NotFound() {
               transition={{
                 duration: 5,
                 repeat: Infinity,
-                ease: 'linear',
+                ease: "linear",
               }}
             />
             <motion.div
@@ -38,7 +38,7 @@ export default function NotFound() {
               transition={{
                 duration: 4,
                 repeat: Infinity,
-                ease: 'linear',
+                ease: "linear",
               }}
             />
           </motion.div>
@@ -49,10 +49,12 @@ export default function NotFound() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <h2 className="text-3xl font-semibold text-gray-800 mb-4">Oops! Page Not Found</h2>
+            <h2 className="text-3xl font-semibold text-gray-800 mb-4">
+              Oops! Page Not Found
+            </h2>
             <p className="text-gray-600 mb-8 max-w-md mx-auto">
-              The page you&apos;re looking for doesn&apos;t exist or has been moved. Let&apos;s get
-              you back on track.
+              The page you&apos;re looking for doesn&apos;t exist or has been
+              moved. Let&apos;s get you back on track.
             </p>
           </motion.div>
 
@@ -95,7 +97,7 @@ export default function NotFound() {
               transition={{
                 duration: 10,
                 repeat: Infinity,
-                ease: 'linear',
+                ease: "linear",
               }}
             />
             <motion.div
@@ -107,7 +109,7 @@ export default function NotFound() {
               transition={{
                 duration: 8,
                 repeat: Infinity,
-                ease: 'linear',
+                ease: "linear",
               }}
             />
           </div>
