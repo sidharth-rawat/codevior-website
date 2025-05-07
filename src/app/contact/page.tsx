@@ -2,10 +2,24 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { MapPin, Phone, Mail, Send } from "lucide-react";
+import { MapPin, Phone, Mail, Send, CheckCircle, AlertCircle } from "lucide-react";
+import { usePostData } from "@/hooks/useApi";
+
+type ContactFormData = {
+  name: string;
+  email: string;
+  phone: string;
+  service: string;
+  message: string;
+};
+
+type ContactResponse = {
+  success: boolean;
+  message: string;
+};
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
     phone: "",
@@ -13,10 +27,48 @@ export default function Contact() {
     message: "",
   });
 
+  const [submitStatus, setSubmitStatus] = useState<{
+    success?: boolean;
+    message?: string;
+  }>({});
+
+  
+  const { mutate: submitContact, isPending } = usePostData<ContactFormData, ContactResponse>('/api/send-email');
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
+    setSubmitStatus({});
+
+    // Submit the contact form data using React Query
+    submitContact(formData, {
+      onSuccess: (response) => {
+        if (response.data.success) {
+          setSubmitStatus({
+            success: true,
+            message: "Thank you! Your message has been sent successfully."
+          });
+          // Reset form after successful submission
+          setFormData({
+            name: "",
+            email: "",
+            phone: "",
+            service: "",
+            message: "",
+          });
+        } else {
+          setSubmitStatus({
+            success: false,
+            message: response.data.message || "Something went wrong. Please try again."
+          });
+        }
+      },
+      onError: (error) => {
+        setSubmitStatus({
+          success: false,
+          message: error.message || "Something went wrong. Please try again."
+        });
+      }
+    });
   };
 
   const handleChange = (
@@ -69,6 +121,21 @@ export default function Contact() {
               className="bg-white rounded-lg shadow-lg p-8"
             >
               <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
+              
+              {/* Status message */}
+              {submitStatus.message && (
+                <div className={`mb-6 p-4 rounded-lg flex items-center gap-2 ${
+                  submitStatus.success 
+                    ? "bg-green-100 text-green-800" 
+                    : "bg-red-100 text-red-800"
+                }`}>
+                  {submitStatus.success 
+                    ? <CheckCircle className="w-5 h-5" /> 
+                    : <AlertCircle className="w-5 h-5" />}
+                  <p>{submitStatus.message}</p>
+                </div>
+              )}
+              
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-gray-700 mb-2">
@@ -149,10 +216,20 @@ export default function Contact() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   type="submit"
-                  className="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-colors flex items-center justify-center gap-2"
+                  disabled={isPending}
+                  className="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-colors flex items-center justify-center gap-2 disabled:bg-purple-400 disabled:cursor-not-allowed"
                 >
-                  <Send className="w-5 h-5" />
-                  Send Message
+                  {isPending ? (
+                    <>
+                      <div className="w-5 h-5 border-t-2 border-b-2 border-white rounded-full animate-spin"></div>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5" />
+                      Send Message
+                    </>
+                  )}
                 </motion.button>
               </form>
             </motion.div>

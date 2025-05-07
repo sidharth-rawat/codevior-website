@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { ReactQueryProvider } from "@/lib/providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,9 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
-        <main className="min-h-screen bg-white pt-16">{children}</main>
-        <Footer />
+        <ReactQueryProvider>
+          <Header />
+          <main className="min-h-screen bg-white pt-16">{children}</main>
+          <Footer />
+        </ReactQueryProvider>
       </body>
     </html>
   );
