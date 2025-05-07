@@ -1,7 +1,13 @@
 import { NextResponse } from 'next/server';
 
+interface ContactFormData {
+  name: string;
+  email: string;
+  message: string;
+}
+
 // Mock function to simulate sending an email or storing contact data
-async function processContactForm(data: any) {
+async function processContactForm(data: ContactFormData) {
   // In a real application, this would send an email, store in a database, etc.
   console.log('Processing contact form data:', data);
   
