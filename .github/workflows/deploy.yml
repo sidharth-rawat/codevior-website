@@ -42,8 +42,7 @@
 #       - name: Invalidate CloudFront
 #         run: |
 #           aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
-
-name: Deploy to Hostinger Shared (FTP Static Site)
+name: Deploy to Hostinger via FTP
 
 on:
   push:
@@ -67,13 +66,15 @@ jobs:
         run: npm install
 
       - name: Build static site
-        run: npm run build
+        run: |
+          npm run build
+          npx next export
 
       - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4
+        uses: SamKirkland/FTP-Deploy-Action@4.3.4
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /public_html/ # or your subdirectory
           local-dir: out/
+          server-dir: public_html/
