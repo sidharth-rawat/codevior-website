@@ -23,6 +23,7 @@ export interface ContactResponse {
 const submitContactForm = async (data: ContactFormData): Promise<ContactResponse> => {
   const response = await fetch('http://15.206.179.104/api/send-email', {
     method: 'POST',
+    
     headers: {
       'Content-Type': 'application/json',
     },
