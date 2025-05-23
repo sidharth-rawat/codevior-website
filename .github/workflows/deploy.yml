@@ -42,6 +42,8 @@
 #       - name: Invalidate CloudFront
 #         run: |
 #           aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+
+
 name: Deploy to Hostinger via FTP
 
 on:
@@ -50,31 +52,30 @@ on:
       - hostinger-deployment
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20' # Use Node.js 20 for Next.js 15 compatibility
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci # Use npm ci for faster, reproducible builds
 
       - name: Build static site
-        run: |
-          npm run build
-          npx next export
+        run: npm run build # No need for npx next export in Next.js 15
 
       - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@4.3.4
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5 # Latest version
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: out/
-          server-dir: public_html/
+          local-dir: out/ # Source folder for static files
+          server-dir: public_html/ # Destination folder on Hostinger
+          protocol: ftps # Use FTPS for secure transfer
+          port: 21 # Default FTP port
