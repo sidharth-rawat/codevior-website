@@ -61,21 +61,22 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Use Node.js 20 for Next.js 15 compatibility
+          node-version: '20'
+          cache: 'npm' # Cache npm dependencies to speed up builds
 
       - name: Install dependencies
-        run: npm ci # Use npm ci for faster, reproducible builds
+        run: npm ci --prefer-offline --no-audit --no-fund # Add flags to avoid network issues
 
       - name: Build static site
-        run: npm run build # No need for npx next export in Next.js 15
+        run: npm run build
 
       - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5 # Latest version
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: out/ # Source folder for static files
-          server-dir: public_html/ # Destination folder on Hostinger
-          protocol: ftps # Use FTPS for secure transfer
-          port: 21 # Default FTP port
+          local-dir: out/
+          server-dir: public_html/
+          protocol: ftps
+          port: 21
