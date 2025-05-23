@@ -3,73 +3,93 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { MapPin, Phone, Mail, Send, CheckCircle, AlertCircle } from "lucide-react";
-import { usePostData } from "@/hooks/useApi";
-
-type ContactFormData = {
-  name: string;
-  email: string;
-  phone: string;
-  service: string;
-  message: string;
-};
-
-type ContactResponse = {
-  success: boolean;
-  message: string;
-};
+import { useContactMutation, ContactFormData } from "@/hooks/useContactMutation";
 
 export default function Contact() {
+  // const fileInputRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
     phone: "",
     service: "",
     message: "",
+    cc: "",
+    bcc: "",
+    attachments: [],
   });
 
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitStatus, setSubmitStatus] = useState<{
     success?: boolean;
     message?: string;
   }>({});
 
-  
-  const { mutate: submitContact, isPending } = usePostData<ContactFormData, ContactResponse>('/api/send-email');
+  const mutation = useContactMutation();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitStatus({});
+    setErrors({});
 
-    // Submit the contact form data using React Query
-    submitContact(formData, {
-      onSuccess: (response) => {
-        if (response.data.success) {
-          setSubmitStatus({
-            success: true,
-            message: "Thank you! Your message has been sent successfully."
+    // Remove empty optional fields
+    const formDataToSubmit = {
+      ...formData,
+      cc: formData.cc || undefined,
+      bcc: formData.bcc || undefined,
+      attachments: selectedFiles.length > 0 ? selectedFiles : undefined,
+    };
+
+    try {
+      const response = await mutation.mutateAsync(formDataToSubmit);
+      
+      if (response.success) {
+        setSubmitStatus({
+          success: true,
+          message: response.message
+        });
+        // Reset form after successful submission
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          service: "",
+          message: "",
+          cc: "",
+          bcc: "",
+          attachments: [],
+        });
+        setSelectedFiles([]);
+      } else {
+        // Handle validation errors
+        if (response.errors) {
+          const newErrors: Record<string, string> = {};
+          response.errors.forEach(error => {
+            newErrors[error.field] = error.message;
           });
-          // Reset form after successful submission
-          setFormData({
-            name: "",
-            email: "",
-            phone: "",
-            service: "",
-            message: "",
-          });
-        } else {
-          setSubmitStatus({
-            success: false,
-            message: response.data.message || "Something went wrong. Please try again."
-          });
+          setErrors(newErrors);
         }
-      },
-      onError: (error) => {
         setSubmitStatus({
           success: false,
-          message: error.message || "Something went wrong. Please try again."
+          message: response.message
         });
       }
-    });
+    } catch (error) {
+      setSubmitStatus({
+        success: false,
+        message: error instanceof Error ? error.message : "An unexpected error occurred. Please try again."
+      });
+    }
   };
+
+  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const files = Array.from(e.target.files || []);
+  //   setSelectedFiles(prev => [...prev, ...files]);
+  // };
+
+  // const removeFile = (index: number) => {
+  //   setSelectedFiles(prev => prev.filter((_, i) => i !== index));
+  // };
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -81,6 +101,13 @@ export default function Contact() {
       ...prev,
       [name]: value,
     }));
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
   };
 
   return (
@@ -139,7 +166,7 @@ export default function Contact() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-gray-700 mb-2">
-                    Name
+                    Name <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
@@ -147,13 +174,19 @@ export default function Contact() {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent ${
+                      errors.name ? 'border-red-500' : 'border-gray-300'
+                    }`}
                     required
                   />
+                  {errors.name && (
+                    <p className="mt-1 text-sm text-red-500">{errors.name}</p>
+                  )}
                 </div>
+
                 <div>
                   <label htmlFor="email" className="block text-gray-700 mb-2">
-                    Email
+                    Email <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="email"
@@ -161,13 +194,19 @@ export default function Contact() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent ${
+                      errors.email ? 'border-red-500' : 'border-gray-300'
+                    }`}
                     required
                   />
+                  {errors.email && (
+                    <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+                  )}
                 </div>
+
                 <div>
                   <label htmlFor="phone" className="block text-gray-700 mb-2">
-                    Phone
+                    Phone <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="tel"
@@ -175,32 +214,46 @@ export default function Contact() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent ${
+                      errors.phone ? 'border-red-500' : 'border-gray-300'
+                    }`}
+                    required
                   />
+                  {errors.phone && (
+                    <p className="mt-1 text-sm text-red-500">{errors.phone}</p>
+                  )}
                 </div>
+
                 <div>
                   <label htmlFor="service" className="block text-gray-700 mb-2">
-                    Service Interested In
+                    Service Interested In <span className="text-red-500">*</span>
                   </label>
                   <select
                     id="service"
                     name="service"
                     value={formData.service}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent ${
+                      errors.service ? 'border-red-500' : 'border-gray-300'
+                    }`}
                     required
                   >
                     <option value="">Select a service</option>
-                    <option value="app-development">App Development</option>
                     <option value="web-development">Web Development</option>
+                    <option value="app-development">App Development</option>
                     <option value="web-design">Web Design</option>
                     <option value="graphic-design">Graphic Design</option>
                     <option value="llm-solutions">LLM Solutions</option>
+                    <option value="digital-transformation">Steel Design and RCC Design</option>
                   </select>
+                  {errors.service && (
+                    <p className="mt-1 text-sm text-red-500">{errors.service}</p>
+                  )}
                 </div>
+
                 <div>
                   <label htmlFor="message" className="block text-gray-700 mb-2">
-                    Message
+                    Message <span className="text-red-500">*</span>
                   </label>
                   <textarea
                     id="message"
@@ -208,18 +261,105 @@ export default function Contact() {
                     value={formData.message}
                     onChange={handleChange}
                     rows={4}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent ${
+                      errors.message ? 'border-red-500' : 'border-gray-300'
+                    }`}
                     required
                   ></textarea>
+                  {errors.message && (
+                    <p className="mt-1 text-sm text-red-500">{errors.message}</p>
+                  )}
                 </div>
+
+                {/* Optional Fields Section */}
+                {/* <div className="border-t pt-6 mt-6">
+                  <h3 className="text-lg font-semibold mb-4">Additional Options</h3>
+                  
+                  <div>
+                    <label htmlFor="cc" className="block text-gray-700 mb-2">
+                      CC Email <span className="text-gray-500 text-sm">(Optional)</span>
+                    </label>
+                    <input
+                      type="email"
+                      id="cc"
+                      name="cc"
+                      value={formData.cc}
+                      onChange={handleChange}
+                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent ${
+                        errors.cc ? 'border-red-500' : 'border-gray-300'
+                      }`}
+                    />
+                    {errors.cc && (
+                      <p className="mt-1 text-sm text-red-500">{errors.cc}</p>
+                    )}
+                  </div>
+
+                  <div className="mt-4">
+                    <label htmlFor="bcc" className="block text-gray-700 mb-2">
+                      BCC Email <span className="text-gray-500 text-sm">(Optional)</span>
+                    </label>
+                    <input
+                      type="email"
+                      id="bcc"
+                      name="bcc"
+                      value={formData.bcc}
+                      onChange={handleChange}
+                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent ${
+                        errors.bcc ? 'border-red-500' : 'border-gray-300'
+                      }`}
+                    />
+                    {errors.bcc && (
+                      <p className="mt-1 text-sm text-red-500">{errors.bcc}</p>
+                    )}
+                  </div>
+
+                  <div className="mt-4">
+                    <label className="block text-gray-700 mb-2">
+                      Attachments <span className="text-gray-500 text-sm">(Optional)</span>
+                    </label>
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      onChange={handleFileChange}
+                      className="hidden"
+                      multiple
+                    />
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      <Paperclip className="w-4 h-4" />
+                      Add Files
+                    </button>
+                    
+                    {selectedFiles.length > 0 && (
+                      <div className="mt-3 space-y-2">
+                        {selectedFiles.map((file, index) => (
+                          <div key={index} className="flex items-center justify-between bg-gray-50 p-2 rounded-lg">
+                            <span className="text-sm text-gray-600 truncate">{file.name}</span>
+                            <button
+                              type="button"
+                              onClick={() => removeFile(index)}
+                              className="text-gray-500 hover:text-red-500"
+                            >
+                              <X className="w-4 h-4" />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div> */}
+
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   type="submit"
-                  disabled={isPending}
+                  disabled={mutation.isPending}
                   className="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-colors flex items-center justify-center gap-2 disabled:bg-purple-400 disabled:cursor-not-allowed"
                 >
-                  {isPending ? (
+                  {mutation.isPending ? (
                     <>
                       <div className="w-5 h-5 border-t-2 border-b-2 border-white rounded-full animate-spin"></div>
                       Sending...

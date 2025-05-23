@@ -195,9 +195,9 @@ const services = [
   },
   {
     icon: RefreshCw,
-    title: "Digital Transformation",
+    title: "Steel Design and RCC Design",
     description:
-      "Transform your business with cutting-edge digital solutions that drive growth and efficiency.",
+      "Comprehensive structural engineering services including Steel Design and RCC Design with detailed drawings.",
     link: "digital-transformation",
   },
 ];

@@ -3,28 +3,28 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { ReactQueryProvider } from "@/lib/providers";
+import Providers from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Codevior - Your Technology Partner",
-  description: "Building innovative solutions for your business needs",
+  description: "We build innovative solutions for your business needs",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ReactQueryProvider>
+        <Providers>
           <Header />
-          <main className="min-h-screen bg-white pt-16">{children}</main>
+          <main>{children}</main>
           <Footer />
-        </ReactQueryProvider>
+        </Providers>
       </body>
     </html>
   );

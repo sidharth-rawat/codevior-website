@@ -67,15 +67,15 @@ const serviceMetadata: Record<string, Metadata> = {
     },
   },
   "digital-transformation": {
-    title: "Digital Transformation Services | Codevior",
+    title: "Steel Design and RCC Design Services | Codevior",
     description:
-      "Comprehensive digital transformation services that help businesses evolve and thrive in the digital age. We combine strategic consulting with technical expertise.",
+      "Comprehensive structural engineering services including Steel Design and RCC Design with detailed drawings. Expert solutions for all your structural needs.",
     keywords:
-      "digital transformation, digital strategy, process automation, cloud migration, digital services",
+      "steel design, RCC design, structural engineering, construction drawings, structural analysis, foundation design",
     openGraph: {
-      title: "Digital Transformation Services | Codevior",
+      title: "Steel Design and RCC Design Services | Codevior",
       description:
-        "Comprehensive digital transformation services that help businesses evolve and thrive in the digital age.",
+        "Comprehensive structural engineering services including Steel Design and RCC Design with detailed drawings.",
       type: "website",
     },
   },
