@@ -43,7 +43,6 @@
 #         run: |
 #           aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
 
-
 name: Deploy to Hostinger via FTP
 
 on:
@@ -62,10 +61,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm' # Cache npm dependencies to speed up builds
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci --prefer-offline --no-audit --no-fund # Add flags to avoid network issues
+        run: npm ci --prefer-offline --no-audit --no-fund
 
       - name: Build static site
         run: npm run build
