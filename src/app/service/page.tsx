@@ -78,7 +78,7 @@ export default function Services() {
                   </h3>
                   <p className="text-gray-600 mb-4">{service.description}</p>
                   <Link
-                    href={`/services/${service.link}`}
+                    href={`/service/${service.link}`}
                     className="inline-flex items-center text-purple-600 hover:text-purple-700 font-medium"
                   >
                     Learn More

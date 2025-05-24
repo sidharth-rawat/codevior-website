@@ -167,15 +167,15 @@ export default function Footer() {
 const quickLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
-  { label: "Services", href: "/services" },
+  { label: "Services", href: "/service" },
   { label: "Contact", href: "/contact" },
   { label: "Blog", href: "/blog" },
 ];
 
 const services = [
-  { label: "App Development", href: "/services#app-development" },
-  { label: "Web Development", href: "/services#web-development" },
-  { label: "Web Design", href: "/services#web-design" },
-  { label: "Graphic Design", href: "/services#graphic-design" },
-  { label: "LLM Solutions", href: "/services#llm-solutions" },
+  { label: "App Development", href: "/service#app-development" },
+  { label: "Web Development", href: "/service#web-development" },
+  { label: "Web Design", href: "/service#web-design" },
+  { label: "Graphic Design", href: "/service#graphic-design" },
+  { label: "LLM Solutions", href: "/service#llm-solutions" },
 ];

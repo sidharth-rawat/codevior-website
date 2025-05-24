@@ -95,7 +95,7 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
                 <p className="text-gray-600 mb-4">{service.description}</p>
                 <Link
-                  href={`/services/${service.link}`}
+                  href={`/service/${service.link}`}
                   className="inline-flex items-center text-purple-600 hover:text-purple-700 font-medium"
                 >
                   Learn More

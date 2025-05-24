@@ -7,6 +7,14 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Navigation mapping to handle URL routing correctly
+  const navigationMap: Record<string, string> = {
+    Home: "/",
+    Services: "/service",
+    About: "/about",
+    Contact: "/contact",
+  };
+
   const menuVariants = {
     closed: {
       opacity: 0,
@@ -66,7 +74,7 @@ export default function Header() {
               Home
             </Link>
             <Link
-              href="/services"
+              href="/service"
               className="text-gray-600 hover:text-purple-600 text-sm lg:text-base"
             >
               Services
@@ -143,7 +151,7 @@ export default function Header() {
                     whileHover={{ x: 10 }}
                   >
                     <Link
-                      href={`/${item.toLowerCase()}`}
+                      href={navigationMap[item]}
                       className="text-gray-600 hover:text-purple-600 block py-2"
                       onClick={() => setIsMenuOpen(false)}
                     >
