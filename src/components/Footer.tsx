@@ -178,4 +178,5 @@ const services = [
   { label: "Web Design", href: "/service#web-design" },
   { label: "Graphic Design", href: "/service#graphic-design" },
   { label: "LLM Solutions", href: "/service#llm-solutions" },
+  { label: "RCC And Steel Solutions", href: "/service#digital-transformation" },
 ];

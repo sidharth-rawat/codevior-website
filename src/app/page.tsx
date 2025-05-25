@@ -20,7 +20,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
       <section
-        className="relative h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat text-white"
+        className="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat text-white -mt-16 md:-mt-20 pt-16 md:pt-20"
         style={{ backgroundImage: `url(${heroBg.src})` }}
       >
         <div className="absolute inset-0 bg-black/50 " />
@@ -34,7 +34,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-6xl font-bold mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6"
           >
             Your Technology Partner!!
           </motion.h1>
@@ -42,7 +42,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl mb-8"
+            className="text-lg sm:text-xl md:text-2xl mb-8 max-w-3xl mx-auto"
           >
             Building innovative solutions for your business needs
           </motion.p>
@@ -55,7 +55,7 @@ export default function Home() {
           >
             <Link
               href="/contact"
-              className="bg-white text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-purple-50 transition-colors"
+              className="inline-block bg-white text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-purple-50 transition-colors shadow-lg hover:shadow-xl"
             >
               Get Started
             </Link>
