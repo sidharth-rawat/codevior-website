@@ -13,7 +13,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import heroBg from "../assets/images/hero-bg.jpg";
-import aboutUsImage from "../assets/images/about-us.png";
+import aboutUsImage from "../assets/images/about.png";
 
 export default function Home() {
   return (

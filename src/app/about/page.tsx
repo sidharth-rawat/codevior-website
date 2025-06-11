@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Lightbulb, Target, Users, Code2 } from "lucide-react";
-import aboutUsImage from "../../assets/images/about-us.png";
+import aboutUsImage from "../../assets/images/about.png";
 
 export default function About() {
   return (
