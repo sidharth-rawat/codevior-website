@@ -116,12 +116,12 @@ export default function Footer() {
               <li className="flex items-start">
                 <MapPin size={20} className="mr-3 text-purple-500 mt-1" />
                 <span className="text-gray-400">
-                  123 Tech Street, Digital City, 12345
+                  123 Tech Street, Digital City, Noida 
                 </span>
               </li>
               <li className="flex items-center">
                 <Phone size={20} className="mr-3 text-purple-500" />
-                <span className="text-gray-400">+1 (555) 123-4567</span>
+                <span className="text-gray-400">+91 8979049772</span>
               </li>
               <li className="flex items-center">
                 <Mail size={20} className="mr-3 text-purple-500" />
